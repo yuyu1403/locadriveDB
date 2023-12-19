@@ -1,0 +1,61 @@
+@startuml
+
+' Classe VEHICLE
+class VEHICLE {
+    -veh_id: INT
+    -veh_num: VARCHAR(9)
+    -veh_brand: VARCHAR(20)
+    -veh_model: VARCHAR(50)
+    -veh_cat: ENUM
+    -veh_daily_price: DECIMAL(6,2)
+    -veh_fuel: ENUM
+    -veh_mileage: INT
+    -veh_transmission: ENUM
+    -veh_conform: TINYINT(1)
+    -veh_tank_ok: TINYINT(1)
+    -veh_service: DATE
+}
+
+' Classe UTILISATEUR
+class UTILISATEUR {
+    -user_id: INT
+    -user_surname: VARCHAR(50)
+    -user_name: VARCHAR(50)
+    -user_email: VARCHAR(100)
+    -user_adress: VARCHAR(250)
+    -user_phone: VARCHAR(20)
+    -user_pwd: VARCHAR(255)
+    -user_role: ENUM
+}
+
+' Classe STAFF
+class STAFF {
+    -staff_id: INT
+    -staff_entry_date: DATE
+    -staff_contract: ENUM
+    -staff_RQTH: TINYINT(1)
+}
+
+' Classe CLIENT
+class CLIENT {
+    -cli_id: INT
+    -cli_licence: VARCHAR(50)
+}
+
+' Classe RESERVATION
+class RESERVATION {
+    -res_id: INT
+    -res_end: DATE
+    -res_total: DECIMAL(6,2)
+    -res_start: DATE
+    -veh_id: INT
+    -user_id: INT
+}
+
+UTILISATEUR <|-- STAFF: Inheritance
+UTILISATEUR <|-- CLIENT: Inheritance
+
+VEHICLE "0..*" -- "1" RESERVATION: has
+UTILISATEUR "0..*" -- "1" RESERVATION: books
+
+@enduml

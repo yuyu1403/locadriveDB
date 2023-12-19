@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+
+' Acteurs
+actor Client
+actor Staff
+Client <|-- Staff
+
+' Cas d'utilisation pour le Client
+Client --> (Créer un compte)
+Client --> (Réserver un véhicule)
+Client --> (Annuler une réservation)
+Client --> (Mettre à jour le profil utilisateur)
+Client --> (Voir les véhicules disponibles à une date spécifique)
+
+' Cas d'utilisation spécifiques pour le Staff
+Staff --> (Ajouter un véhicule)
+Staff --> (Modifier les détails d'un véhicule)
+Staff --> (Consulter les réservations pour un utilisateur)
+Staff --> (Consulter les réservations pour un véhicule)
+Staff --> (Supprimer un compte utilisateur)
+Staff --> (Supprimer un véhicule)
+
+' Extensions / Inclusions
+(Consulter les réservations pour un utilisateur) ..> (Consulter les réservations pour un véhicule) : <<include>>
+(Réserver un véhicule) ..> (Voir les véhicules disponibles à une date spécifique) : <<include>>
+
+@enduml
