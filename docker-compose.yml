@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  mariadb: 
+    image: mariadb:latest
+    container_name: mariadb
+    hostname: mariadb
+    # restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      # MYSQL_DATABASE: LOCADRIVE
+    volumes:
+      - ./Database/1-Locadrive_Schema.sql:/docker-entrypoint-initdb.d/1-Locadrive_Schema.sql
+      - ./Database/2-Locadrive_Schema_Dummy.sql:/docker-entrypoint-initdb.d/2-Locadrive_Schema_Dummy.sql
+    ports:
+      - 3306:3306
+
+
+  test-container:
+    image: ubuntu:latest
+    container_name: test-container
+    command: sleep infinity
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mariadb
+  
+volumes:
+  mariadb:
